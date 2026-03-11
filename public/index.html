@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Utility Meter Dashboard</title>
+</head>
+
+<body>
+
+<h1>Utility Meter Dashboard</h1>
+
+<input id="meterId" placeholder="Meter ID">
+<input id="previous" placeholder="Previous Reading">
+<input id="current" placeholder="Current Reading">
+
+<button onclick="addMeter()">Add Meter</button>
+
+<h2>Meter Records</h2>
+
+<ul id="list"></ul>
+
+<script>
+
+async function addMeter() {
+
+const meterId = document.getElementById("meterId").value
+const previous = Number(document.getElementById("previous").value)
+const current = Number(document.getElementById("current").value)
+
+await fetch("/meters", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+meterId,
+previous,
+current
+})
+})
+
+loadMeters()
+}
+
+async function loadMeters(){
+
+const res = await fetch("/meters")
+const meters = await res.json()
+
+const list = document.getElementById("list")
+list.innerHTML = ""
+
+meters.forEach(m => {
+
+const li = document.createElement("li")
+
+li.innerText =
+"Meter: " + m.meterId +
+" | Usage: " + m.usage
+
+list.appendChild(li)
+
+})
+
+}
+
+loadMeters()
+
+</script>
+
+</body>
+
+</html>
