@@ -58,7 +58,7 @@ Usage: 200 units
 ## Installation
 
 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/utility-meter-dashboard.git
+git clone https://github.com/dumisanimabuza087-svg/utility-meter-dashboard.git
 
 2. Navigate into the project folder
 cd utility-meter-dashboard
